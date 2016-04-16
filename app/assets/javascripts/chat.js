@@ -36,7 +36,7 @@ $( document ).ready(function() {
   }
 
   function callSimSim(message) {
-    var url = `/message?message=${encodeURI(message)}`;
+    var url = '/message?message=' + encodeURI(message);
     return $.getJSON({
         url: url,
         contentType: "application/json",
