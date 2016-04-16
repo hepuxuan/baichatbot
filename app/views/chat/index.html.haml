@@ -1,0 +1,12 @@
+.chat
+  .chat-title
+    %h1 Fabio Ottaviani
+    %h2 Supah
+    %figure.avatar
+      = image_tag  "bai.png"
+  .messages
+    .messages-content
+  .message-box
+    %textarea.message-input{:placeholder => "Type message...", :type => "text"}
+    %button.message-submit{:type => "submit"} Send
+.bg
