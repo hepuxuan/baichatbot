@@ -3,10 +3,9 @@ require 'open-uri'
 require "uri"
 require 'json'
 class SimSimiService
-  @@API_KEY = 'ee933cb5-35a5-4397-b76f-7cf6d5dd941f'
+  @@API_KEY = 'WVJBNGNoMmhEUG5GdW1Hck49R2NQT0E9WndVQUFBPT0'
   def getResponse(message)
-    uri = URI.parse("http://api.simsimi.com/request.p?key=#{@@API_KEY}&lc=en&ft=1.0&text=#{URI::encode(message)}")
-    response = Net::HTTP.get_response(uri)
-    JSON.parse(response.body)
+    uri = URI.parse("http://api.douqq.com/?key=#{@@API_KEY}&msg=#{URI::encode(message)}")
+    Net::HTTP.get_response(uri).body.force_encoding('UTF-8')
   end
 end
