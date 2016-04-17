@@ -72,7 +72,7 @@ $( document ).ready(function() {
       var preConnect = !disconnect;
       disconnect = (new Date() - lastInputTime) > DISCONNECT_THRESHOLD;
       if (preConnect && disconnect) {
-        addMessage('See ya next time, Bye!');
+        addMessage('下次再见啦 拜拜！ 喵');
       } else if (!disconnect && idle && (new Date() - lastOutputTime) > ADD_MESSAGE_INTERVAL) {
         messageService.getIdle().then(function (message) {
           addMessage(message);
