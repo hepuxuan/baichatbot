@@ -1,8 +1,19 @@
 
 var messageService = (function () {
+  var baseUrl = '/message';
   var service = {
-    get: function(message) {
-      var url = message ? '/message?message=' + encodeURI(message) : '/message';
+    get: function (message) {
+      var url = baseUrl + '?message=' + encodeURI(message);
+      return $.getJSON({
+          url: url,
+          contentType: "application/json",
+      }).then(function (Resp) {
+        return Resp.response;
+      });
+    },
+
+    getIdle: function () {
+      var url = baseUrl + '/idle'
       return $.getJSON({
           url: url,
           contentType: "application/json",
@@ -64,7 +75,7 @@ $( document ).ready(function() {
       if (preConnect && disconnect) {
         addMessage('See ya next time, Bye!');
       } else if (!disconnect && idle && (new Date() - lastOutputTime) > ADD_MESSAGE_INTERVAL) {
-        messageService.get().then(function (message) {
+        messageService.getIdle().then(function (message) {
           addMessage(message);
           i++;
         });

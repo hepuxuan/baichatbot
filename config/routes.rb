@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   get 'chat/index'
   scope '/message' do
     get '/' => 'message#get'
+    scope '/idle' do
+      get '/' => 'message#getIdle'
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
