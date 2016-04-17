@@ -10,4 +10,3 @@ class SimSimiService
     JSON.parse(response.body)
   end
 end
-
