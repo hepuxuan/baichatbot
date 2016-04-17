@@ -54,7 +54,7 @@ Chat
 .chat {
   @include center;
   width: 600px;
-  height: 80vh;
+  height: 70vh;
   max-height: 900px;
   z-index: 2;
   overflow: hidden;
@@ -78,11 +78,11 @@ Chat Title
   color: #fff;
   text-transform: uppercase;
   text-align: left;
-  padding: 10px 10px 10px 50px;
+  padding: 10px 10px 10px 60px;
   
   h1 {
     font-weight: normal;
-    font-size: 20px;
+    font-size: 30px;
     margin: 0;
     padding: 0;
   }
@@ -93,8 +93,8 @@ Chat Title
     top: 8px;
     left: 9px;
     border-radius: 30px;
-    width: 30px;
-    height: 30px;
+    width: 45px;
+    height: 45px;
     overflow: hidden;
     margin: 0;
     padding: 0;
@@ -159,11 +159,11 @@ Messages
     .avatar {
       position: absolute;
       z-index: 1;
-      bottom: -15px;
-      left: -35px;
+      bottom: -45px;
+      left: -45px;
       border-radius: 30px;
-      width: 30px;
-      height: 30px;
+      width: 45px;
+      height: 45px;
       overflow: hidden;
       margin: 0;
       padding: 0;
