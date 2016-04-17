@@ -17,7 +17,7 @@ var messageService = (function () {
 
 
 $( document ).ready(function() {
-  var ADD_MESSAGE_INTERVAL = 60 * 1000;
+  var ADD_MESSAGE_INTERVAL = 10 * 1000;
   var d;
   var h;
   var m;
