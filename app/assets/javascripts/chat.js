@@ -38,13 +38,12 @@ $( document ).ready(function() {
   var $messages = $('.messages-content');
   var addMessageEvent = new Event('addMessage');
   var insertMessageEvent = new Event('InsertMessage');
-
-  $messages.mCustomScrollbar();
-  addMessage('hi buddy, what\'s up');
   var lastInputTime = new Date();
   var lastOutputTime = new Date();
 
   (function initDocument() {
+    $messages.mCustomScrollbar();
+    addMessage('欢迎来到小白的世界， 如有需要请联系puxuanhe@gmail.com');
     document.addEventListener('addMessage', function (e) {
       updateScrollbar();
       setDate();
