@@ -12,14 +12,14 @@ class MessageController < ApplicationController
       'mew!mew!mew',
       '喵喵喵!',
       'wait a sec, GIVE ME TREATS and then I\'ll talk to you',
-      'Dn\'t care, I need to get some sleep'
+      'Don\'t care, I need to get some sleep'
     ]
 
     response = @@simsimi_service.getResponse(params[:message])
-    if !response[:response]
-       response[:response] = default_response_list[rand(default_response_list.size)]
+    if !response['response']
+       response['response'] = default_response_list[rand(default_response_list.size)]
     end
 
-    render json: {response: response[:response]}
+    render json: {response: response['response']}
   end
 end
