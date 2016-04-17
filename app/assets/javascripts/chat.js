@@ -17,20 +17,30 @@ var messageService = (function () {
 
 
 $( document ).ready(function() {
-  var ADD_MESSAGE_INTERVAL = 10 * 1000;
+  var ADD_MESSAGE_INTERVAL = 30 * 1000;
+  var DISCONNECT_THRESHOLD = 2 * 60 * 1000;
+  var disconnect = false;
   var d;
   var h;
   var m;
   var i = 0;
   var $messages = $('.messages-content');
   var addMessageEvent = new Event('addMessage');
+  var insertMessageEvent = new Event('InsertMessage');
 
   $messages.mCustomScrollbar();
   addMessage('hi buddy, what\'s up');
   var lastInputTime = new Date();
+  var lastOutputTime = new Date();
 
   (function initDocument() {
     document.addEventListener('addMessage', function (e) {
+      updateScrollbar();
+      setDate();
+      lastOutputTime = new Date();
+    }, false);
+
+    document.addEventListener('InsertMessage', function (e) {
       updateScrollbar();
       setDate();
       lastInputTime = new Date();
@@ -45,11 +55,15 @@ $( document ).ready(function() {
         insertMessage();
         return false;
       }
-    })
+    });
 
     setInterval(function() {
-      var idle = (new Date() - lastInputTime) > ADD_MESSAGE_INTERVAL;
-      if (idle) {
+      var idle =  (new Date() - lastInputTime) > ADD_MESSAGE_INTERVAL;
+      var preConnect = !disconnect;
+      disconnect = (new Date() - lastInputTime) > DISCONNECT_THRESHOLD;
+      if (preConnect && disconnect) {
+        addMessage('See ya next time, Bye!');
+      } else if (!disconnect && idle && (new Date() - lastOutputTime) > ADD_MESSAGE_INTERVAL) {
         messageService.get().then(function (message) {
           addMessage(message);
           i++;
@@ -84,6 +98,7 @@ $( document ).ready(function() {
     messageService.get(msg).then(function(message) {
       addMessage(message);
     });
+    document.dispatchEvent(insertMessageEvent);
   }
   function addMessage(message) {
     if ($('.message-input').val() != '') {
