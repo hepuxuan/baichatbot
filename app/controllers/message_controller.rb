@@ -19,7 +19,7 @@ class MessageController < ApplicationController
     'Are you still there?',
     'where are you buddy',
     'please don\'t ignore me',
-    'you are hearting my feeling'
+    'Seriously you are hurting my feeling'
   ]
   def get
     response = {}
