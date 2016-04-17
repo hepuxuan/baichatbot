@@ -13,11 +13,13 @@ class MessageController < ApplicationController
     'Don\'t care, I need to get some sleep'
   ]
 
-  @@default_message_list = [
+  @@idle_message_list = [
     'hihihi',
     'TALK TO ME!',
     'Are you still there?',
-    'where are you buddy'
+    'where are you buddy',
+    'please don\'t ignore me',
+    'you are hearting my feeling'
   ]
   def get
     response = {}
@@ -25,7 +27,7 @@ class MessageController < ApplicationController
       response = @@simsimi_service.getResponse(params[:message])
       response['response'] = @@default_response_list[rand(@@default_response_list.size)] unless response.has_key?('response')
     else
-      response['response'] = @@default_message_list[rand(@@default_message_list.size)]
+      response['response'] = @@idle_message_list[rand(@@idle_message_list.size)]
     end
 
     render json: {response: response['response']}
