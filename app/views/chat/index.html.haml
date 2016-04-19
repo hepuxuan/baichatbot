@@ -1,10 +1,11 @@
 .chat
   .chat-title
-    %h1 小白
+    %h1=@viewModel.title
     %figure.avatar
       #bai-icon= image_tag  "bai.png"
   .messages
     .messages-content
   .message-box
-    %textarea.message-input{:placeholder => "输入消息...", :type => "text"}
-    %button.message-submit{:type => "submit"} 发送
+    %textarea.message-input{:placeholder => @viewModel.message_placeholder, :type => "text"}
+    %button.message-submit{:type => "submit"}
+      = @viewModel.message_button

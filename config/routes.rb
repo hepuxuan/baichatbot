@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   scope '/message' do
     get '/' => 'message#get'
     scope '/idle' do
-      get '/' => 'message#getIdle'
+      get '/' => 'message#get_idle'
     end
   end
 

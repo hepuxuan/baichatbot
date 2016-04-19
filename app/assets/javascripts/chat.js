@@ -3,7 +3,7 @@ var messageService = (function () {
   var baseUrl = '/message';
   var service = {
     get: function (message) {
-      var url = baseUrl + '?message=' + encodeURI(message);
+      var url = baseUrl + '?message=' + encodeURI(message) + '&lang=' + getLang();
       return $.getJSON({
           url: url,
           contentType: "application/json",
@@ -11,9 +11,8 @@ var messageService = (function () {
         return Resp.response;
       });
     },
-
     getIdle: function () {
-      var url = baseUrl + '/idle'
+      var url = baseUrl + '/idle' + '?lang=' + getLang();
       return $.getJSON({
           url: url,
           contentType: "application/json",
@@ -21,7 +20,20 @@ var messageService = (function () {
         return Resp.response;
       });
     },
+    getLang: getLang,
   };
+
+  // copied from stackoverflow : http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+  function getLang() {
+    var name = 'lang';
+    var url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)", "i"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return 'eng';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+  }
 
   return service;
 })();
@@ -43,7 +55,14 @@ $( document ).ready(function() {
 
   (function initDocument() {
     $messages.mCustomScrollbar();
-    addMessage('欢迎来到小白的世界， 如有需要请联系puxuanhe@gmail.com');
+    switch(messageService.getLang()) {
+      case 'cn':
+        addMessage('欢迎来到小白的世界， make sure you watch <a href="https://github.com/hepuxuan/baichatbot">baichatbot</a> on github');
+        break;
+      default:
+        addMessage('Welcome! make sure you watch <a href="https://github.com/hepuxuan/baichatbot">baichatbot</a> on github!');
+    }
+    
     document.addEventListener('addMessage', function (e) {
       updateScrollbar();
       setDate();
@@ -72,7 +91,14 @@ $( document ).ready(function() {
       var preConnect = !disconnect;
       disconnect = (new Date() - lastInputTime) > DISCONNECT_THRESHOLD;
       if (preConnect && disconnect) {
-        addMessage('下次再见啦 拜拜！ 喵');
+        switch(messageService.getLang()) {
+          case 'cn':
+            addMessage('下次再见啦 拜拜！ 喵');
+            break;
+          default:
+            addMessage('see you next time BYE! mew');
+        }
+        
       } else if (!disconnect && idle && (new Date() - lastOutputTime) > ADD_MESSAGE_INTERVAL) {
         messageService.getIdle().then(function (message) {
           addMessage(message);
