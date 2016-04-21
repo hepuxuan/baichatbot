@@ -9,10 +9,8 @@ class MessageController < ApplicationController
   @@simsimi_service = SimSimiService.new()
   @@douqq_service = DouQQService.new()
   @@default_response_list = {
-    'eng' => [
+    'en' => [
       'mew!mew!mew',
-      'wait a sec, GIVE ME TREATS and then I\'ll talk to you',
-      'Don\'t care, I need to get some sleep',
       'Sorry I do not understand you',
       'Excuse me?'
     ],
@@ -23,7 +21,7 @@ class MessageController < ApplicationController
   }
 
   @@idle_message_list = {
-    'eng' => [
+    'en' => [
       'hihihi',
       'TALK TO ME!',
       'Are you still there?',
@@ -58,7 +56,7 @@ class MessageController < ApplicationController
   private
 
   def lang
-    params[:lang].present? ? params[:lang] : 'eng'
+    params[:lang].present? ? params[:lang] : 'en'
   end
 
   def service()

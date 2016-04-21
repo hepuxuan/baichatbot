@@ -30,8 +30,8 @@ var messageService = (function () {
     name = name.replace(/[\[\]]/g, "\\$&");
     var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)", "i"),
         results = regex.exec(url);
-    if (!results) return 'eng';
-    if (!results[2]) return 'eng';
+    if (!results) return 'en';
+    if (!results[2]) return 'en';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
   }
 
